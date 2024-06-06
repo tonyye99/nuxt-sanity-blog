@@ -1,5 +1,14 @@
+<script setup lang="ts">
+useSeoMeta({
+
+})
+</script>
 <template>
-  <div>
-    <NuxtPage />
-  </div>
+  <NuxtLayout name="section-container">
+    <Header />
+    <main>
+      <NuxtPage />
+    </main>
+    <Footer />
+  </NuxtLayout>
 </template>

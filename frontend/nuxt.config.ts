@@ -1,7 +1,38 @@
+const colors = require("tailwindcss/colors");
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxtjs/sanity", "@nuxtjs/tailwindcss"],
+  app: {
+    head: {
+      title: "Nuxt 3 Sanity Blog",
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        {
+          hid: "description",
+          name: "description",
+          content: "Nuxt 3 Sanity Blog",
+        },
+      ],
+      link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+      bodyAttrs: {
+        class:
+          "bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white",
+      },
+    },
+  },
+  modules: [
+    "@nuxtjs/sanity",
+    "@nuxtjs/tailwindcss",
+    "@nuxtjs/color-mode",
+    "nuxt-icon",
+  ],
+  colorMode: {
+    classSuffix: "",
+  },
+  tailwindcss: {
+    configPath: "./tailwind.config.js",
+  },
   sanity: {
     projectId: process.env.NUXT_SANITY_PROJECT_ID,
     dataset: process.env.NUXT_SANITY_DATASET,
