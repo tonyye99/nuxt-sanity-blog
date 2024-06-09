@@ -1,14 +1,19 @@
 <script setup lang="ts">
-useSeoMeta({
-
+useHead({
+  bodyAttrs: {
+    class: 'bg-primary pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white'
+  }
 })
 </script>
+
 <template>
   <NuxtLayout name="section-container">
-    <Header />
-    <main>
-      <NuxtPage />
-    </main>
-    <Footer />
+    <div class="flex h-screen flex-col justify-between font-sans">
+      <Header />
+      <main class="mb-auto">
+        <NuxtPage />
+      </main>
+      <Footer />
+    </div>
   </NuxtLayout>
 </template>

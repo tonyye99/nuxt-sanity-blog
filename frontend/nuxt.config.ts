@@ -15,10 +15,6 @@ export default defineNuxtConfig({
         },
       ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-      bodyAttrs: {
-        class:
-          "bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white",
-      },
     },
   },
   modules: [
@@ -26,6 +22,8 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
     "nuxt-icon",
+    "@vueuse/nuxt",
+    "@nuxt/image"
   ],
   colorMode: {
     classSuffix: "",

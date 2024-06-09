@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { onClickOutside } from '#imports';
+
+const menuRef = ref(null)
+onClickOutside(menuRef, () => (isOpen.value = false))
+
 const colorMode = useColorMode()
 const isOpen = ref(false)
 const selectTheme = (value: string) => {
@@ -19,6 +24,7 @@ const selectTheme = (value: string) => {
             <Icon name="system-uicons:airplay" size="16px" v-else />
         </button>
         <div v-if="isOpen"
+            ref="menuRef"
             class="absolue absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 dark:divide-gray-700 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
             <div class="py-2 px-4 flex items-center gap-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 rounded-t-lg" @click="selectTheme('system')">
                 <Icon name="system-uicons:airplay" size="18px" /> System
