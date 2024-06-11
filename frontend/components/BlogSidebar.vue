@@ -9,11 +9,11 @@ const twitterUrl = author?.twitter?.replace('https://twitter.com/', '@').replace
 </script>
 
 <template>
-    <dl class="pb-10 pt-6 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
+    <dl class="py-8 xl:border-b xl:border-gray-200 xl:dark:border-gray-700">
         <dt class="sr-only">Authors</dt>
         <dd>
             <ul class="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
-                <li class="flex items-center space-x-2" key={author.name}>
+                <li class="flex items-center space-x-2" :key="author.name">
                     <NuxtImg :src="$urlFor(author.image!).width(64).url()" class="rounded-full" />
                     <dl class="whitespace-nowrap text-sm font-medium leading-5">
                         <dt class="sr-only">Name</dt>

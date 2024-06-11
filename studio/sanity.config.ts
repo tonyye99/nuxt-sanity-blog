@@ -3,6 +3,7 @@ import {structureTool} from 'sanity/structure'
 import {presentationTool} from 'sanity/presentation'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
+import {codeInput} from '@sanity/code-input'
 
 export const projectId = process.env.SANITY_STUDIO_PROJECT_ID!
 export const dataset = process.env.SANITY_STUDIO_DATASET!
@@ -26,6 +27,7 @@ export default defineConfig({
       },
     }),
     visionTool(),
+    codeInput(),
   ],
 
   schema: {

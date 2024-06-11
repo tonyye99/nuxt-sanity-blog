@@ -16,6 +16,7 @@
     "@portabletext/vue": "^1.0.11",
     "@sanity/image-url": "^1.0.2",
     "nuxt": "^3.11.2",
+    "slugify": "^1.6.6",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2"
   },
@@ -24,6 +25,7 @@
     "@sanity/types": "^3.45.0",
     "@vueuse/core": "^10.10.0",
     "@vueuse/nuxt": "^10.10.0",
-    "nuxt-icon": "^0.6.10"
+    "nuxt-icon": "^0.6.10",
+    "shiki": "^1.6.3"
   }
 }

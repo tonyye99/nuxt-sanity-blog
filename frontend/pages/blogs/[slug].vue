@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script setup lang="tsx">
 import { type Post } from '~/types/Post'
 // @ts-ignore
-import { PortableText } from '@portabletext/vue'
+import { PortableText, toPlainText } from '@portabletext/vue'
 
 const route = useRoute()
 
@@ -9,6 +9,37 @@ const query = groq`*[ _type == "post" && slug.current == $slug][0]{ ..., author-
 const { data: post } = await useSanityQuery<Post>(query, {
     slug: route.params.slug,
 })
+
+const CodeComponent = ({ value }: any) => {
+    return <shiki-style code={value.code} lang={value.language} />
+}
+
+const { $slugify } = useNuxtApp()
+
+const components = {
+    types: {
+        code: CodeComponent
+    },
+    block: {
+        h1: ({ value }: any, { slots }: any) => {
+            const slug = $slugify(toPlainText(value), { lower: true })
+            return h('h1', { id: slug, class: 'text-3xl font-extrabold leading-9 tracking-tight py-3' }, slots.default?.())
+        },
+        h2: ({ value }: any, { slots }: any) => {
+            const slug = $slugify(toPlainText(value), { lower: true })
+            return h('h2', { id: slug, class: 'text-2xl font-extrabold leading-9 tracking-tight py-3' }, slots.default?.())
+        },
+        h3: ({ value }: any, { slots }: any) => {
+            const slug = $slugify(toPlainText(value), { lower: true })
+            return h('h3', { id: slug, class: 'text-xl font-extrabold leading-9 tracking-tight py-3' }, slots.default?.())
+        },
+    },
+    listItem: {
+        bullet: (_: any, { slots }: any) => {
+            return h('li', { class: 'list-disc ml-4' }, slots.default?.())
+        }
+    }
+}
 
 </script>
 
@@ -20,14 +51,14 @@ const { data: post } = await useSanityQuery<Post>(query, {
         <template #title>
             <BlogTitle v-if="post" :title="post.title!" />
         </template>
-        <template #left>
-            <BlogSidebar v-if="post?.author" :author="post.author" />
+        <template #left="{ className }">
+            <BlogSidebar v-if="post?.author" :author="post.author" :class="className"/>
         </template>
         <template #mainImage>
             <BlogMainImage v-if="post?.mainImage" :main-image="post.mainImage" />
         </template>
         <template #content>
-            <PortableText v-if="post" :value="post.body" class="prose dark:prose-invert" />
+            <PortableText :value="post!.body" :components="components" />
         </template>
         <template #footer>
             <BlogFooter v-if="post" :categories="post.categories" />

@@ -1,11 +1,21 @@
 <template>
     <article>
-        <div class="space-y-1 pb-10 text-center dark:border-gray-700">
+        <div class="pb-10 dark:border-gray-700">
+            <header class="pt-6 xl:pb-6">
+                <slot name="title"></slot>
+
+                <slot name="left" className="border-none"></slot>
+
+
+            </header>
+
             <slot name="mainImage"></slot>
-            <slot name="title"></slot>
         </div>
         <div className="prose max-w-none py-4 dark:prose-invert">
             <slot name="content"></slot>
+        </div>
+        <div>
+            <slot name="footer"></slot>
         </div>
     </article>
 </template>

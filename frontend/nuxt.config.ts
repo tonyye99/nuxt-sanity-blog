@@ -23,7 +23,7 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "nuxt-icon",
     "@vueuse/nuxt",
-    "@nuxt/image"
+    "@nuxt/image",
   ],
   colorMode: {
     classSuffix: "",
