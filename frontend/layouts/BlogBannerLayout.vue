@@ -15,7 +15,7 @@
             <slot name="content"></slot>
         </div>
         <div>
-            <slot name="footer"></slot>
+            <slot name="footer" className="divide-none"></slot>
         </div>
     </article>
 </template>

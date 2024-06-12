@@ -6,7 +6,7 @@ import { PortableText, toPlainText } from '@portabletext/vue'
 const route = useRoute()
 
 const query = groq`*[ _type == "post" && slug.current == $slug][0]{ ..., author->, categories[]->{title}, layout->{title, slug} }`
-const { data: post } = await useSanityQuery<Post>(query, {
+const { data: post, pending, error } = await useSanityQuery<Post>(query, {
     slug: route.params.slug,
 })
 
@@ -14,11 +14,18 @@ const CodeComponent = ({ value }: any) => {
     return <shiki-style code={value.code} lang={value.language} />
 }
 
-const { $slugify } = useNuxtApp()
+const { $slugify, $urlFor } = useNuxtApp()
 
 const components = {
     types: {
-        code: CodeComponent
+        code: CodeComponent,
+        image: ({ value }: any) => {
+            return (
+                <div class='block py-4'>
+                    <nuxt-img src={$urlFor(value).width(1200).url()} class="mx-auto rounded-md" />
+                </div>
+            )
+        }
     },
     block: {
         h1: ({ value }: any, { slots }: any) => {
@@ -52,7 +59,7 @@ const components = {
             <BlogTitle v-if="post" :title="post.title!" />
         </template>
         <template #left="{ className }">
-            <BlogSidebar v-if="post?.author" :author="post.author" :class="className"/>
+            <BlogSidebar v-if="post?.author" :author="post.author" :class="className" />
         </template>
         <template #mainImage>
             <BlogMainImage v-if="post?.mainImage" :main-image="post.mainImage" />
@@ -60,8 +67,8 @@ const components = {
         <template #content>
             <PortableText :value="post!.body" :components="components" />
         </template>
-        <template #footer>
-            <BlogFooter v-if="post" :categories="post.categories" />
+        <template #footer="{ className }">
+            <BlogFooter v-if="post" :categories="post.categories" :class="className" />
         </template>
     </NuxtLayout>
 </template>
